@@ -448,7 +448,7 @@ public class Backend {
         if (distance.getYDifference() > magic.TELEPORT_MIN() || distance.getYDifference() < 0) {
             return PASS;
         }
-        if (!isMovingExempt(player) && !Utilities.isClimbableBlock(player.getLocation().getBlock()) && !Utilities.isClimbableBlock(player.getLocation().add(0, -1, 0).getBlock()) && !player.isInsideVehicle() && !Utilities.isInWater(player) && !hasJumpPotion(player)) {
+        if (!isMovingExempt(player) && !Utilities.isClimbableBlock(player.getLocation().getBlock()) && !Utilities.isClimbableBlock(player.getLocation().add(0, -1, 0).getBlock()) && !player.isInsideVehicle() && !Utilities.isInWater(player) && !hasJumpPotion(player) && !hasSpeedPotion(player)) {
             double y1 = player.getLocation().getY();
             String name = player.getName();
             // Fix Y axis spam.
