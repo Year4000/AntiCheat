@@ -1,0 +1,17 @@
+net.gravitydevelopment.anticheat
+net.gravitydevelopment.anticheat.api
+net.gravitydevelopment.anticheat.check
+net.gravitydevelopment.anticheat.command
+net.gravitydevelopment.anticheat.command.executors
+net.gravitydevelopment.anticheat.config
+net.gravitydevelopment.anticheat.config.files
+net.gravitydevelopment.anticheat.config.holders.mysql
+net.gravitydevelopment.anticheat.config.holders.yaml
+net.gravitydevelopment.anticheat.config.providers
+net.gravitydevelopment.anticheat.config.yaml
+net.gravitydevelopment.anticheat.event
+net.gravitydevelopment.anticheat.manage
+net.gravitydevelopment.anticheat.util
+net.gravitydevelopment.anticheat.util.enterprise
+net.gravitydevelopment.anticheat.util.rule
+net.gravitydevelopment.anticheat.xray
