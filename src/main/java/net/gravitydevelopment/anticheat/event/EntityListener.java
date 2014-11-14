@@ -130,7 +130,9 @@ public class EntityListener extends EventListener {
                 }
             }
             if (e.getDamager() instanceof Player) {
+                boolean explosion = event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
                 Player player = (Player) e.getDamager();
+
                 getBackend().logDamage(player, 1);
                 if (getCheckManager().willCheck(player, CheckType.AUTOTOOL)) {
                     CheckResult result = getBackend().checkAutoTool(player);
@@ -148,7 +150,7 @@ public class EntityListener extends EventListener {
                         noHack = false;
                     }
                 }
-                if (getCheckManager().willCheck(player, CheckType.NO_SWING)) {
+                if (getCheckManager().willCheck(player, CheckType.NO_SWING) && !explosion) {
                     CheckResult result = getBackend().checkAnimation(player, event.getEntity());
                     if (result.failed()) {
                         event.setCancelled(!silentMode());
