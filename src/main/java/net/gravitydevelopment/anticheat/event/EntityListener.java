@@ -95,6 +95,8 @@ public class EntityListener extends EventListener {
         boolean noHack = true;
         if (event instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent e = (EntityDamageByEntityEvent) event;
+            boolean explosion = event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
+
             if (event.getEntity() instanceof Player) {
                 Player player = (Player) event.getEntity();
                 // Keep players from shooting an arrow at themselves in order to fly
@@ -112,9 +114,9 @@ public class EntityListener extends EventListener {
                     getBackend().logDamage(p, 1);
                     int value = p.getInventory().getItemInHand().containsEnchantment(Enchantment.KNOCKBACK) ? 2 : 1;
                     getBackend().logDamage(player, value);
-                    if (getCheckManager().willCheck(p, CheckType.LONG_REACH)) {
+                    if (getCheckManager().willCheck(p, CheckType.LONG_REACH) && !explosion) {
                         Distance distance = new Distance(player.getLocation(), p.getLocation());
-                        CheckResult result = getBackend().checkLongReachDamage(player, distance.getXDifference(), distance.getYDifference(), distance.getZDifference());
+                        CheckResult result = getBackend().checkLongReachDamage(p, distance.getXDifference(), distance.getYDifference(), distance.getZDifference());
                         if (result.failed()) {
                             event.setCancelled(!silentMode());
                             log(result.getMessage(), p, CheckType.LONG_REACH);
@@ -130,7 +132,6 @@ public class EntityListener extends EventListener {
                 }
             }
             if (e.getDamager() instanceof Player) {
-                boolean explosion = event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION || event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
                 Player player = (Player) e.getDamager();
 
                 getBackend().logDamage(player, 1);
