@@ -743,6 +743,7 @@ public class Backend {
 
     public void logBowWindUp(Player player) {
         bowWindUp.put(player.getName(), System.currentTimeMillis());
+        logAnimation(player);
     }
 
     public void logEatingStart(Player player) {
