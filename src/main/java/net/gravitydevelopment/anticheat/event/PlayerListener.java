@@ -204,6 +204,10 @@ public class PlayerListener extends EventListener {
                 getBackend().logEatingStart(player);
             }
         }
+        else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            getBackend().logAnimation(player);
+        }
+
         Block block = event.getClickedBlock();
 
         if (block != null) {
