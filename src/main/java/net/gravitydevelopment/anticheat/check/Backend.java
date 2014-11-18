@@ -1008,6 +1008,7 @@ public class Backend {
         movingExempt.put(player.getName(), System.currentTimeMillis() + magic.TELEPORT_TIME());
 
         /* Data for fly/speed should be reset */
+        ascensionCount.remove(player.getName());
         nofallViolation.remove(player.getName());
         blocksOverFlight.remove(player.getName());
         yAxisViolations.remove(player.getName());
