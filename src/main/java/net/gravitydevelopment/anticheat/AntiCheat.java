@@ -28,15 +28,12 @@ import net.gravitydevelopment.anticheat.util.User;
 import net.gravitydevelopment.anticheat.util.Utilities;
 import net.gravitydevelopment.anticheat.xray.XRayListener;
 import net.gravitydevelopment.anticheat.xray.XRayTracker;
-import net.gravitydevelopment.updater.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +42,9 @@ public class AntiCheat extends JavaPlugin {
     private static AntiCheatManager manager;
     private static AntiCheat plugin;
     private static List<Listener> eventList = new ArrayList<Listener>();
-    private static boolean update = false;
-    private static String updateDetails = null;
     private static Configuration config;
     private static boolean verbose;
     private static boolean developer;
-    private static final int PROJECT_ID = 38723;
     private static PacketManager packetManager;
     private static boolean protocolLib = false;
     private static Long loadTime;
@@ -71,7 +65,6 @@ public class AntiCheat extends JavaPlugin {
         setupXray();
         setupEvents();
         setupCommands();
-        setupUpdater();
         // setupProtocol(); TODO
         // Enterprise must come before levels
         setupEnterprise();
@@ -147,25 +140,6 @@ public class AntiCheat extends JavaPlugin {
         verboseLog("Registered commands.");
     }
 
-    private void setupUpdater() {
-        if (config.getConfig().autoUpdate.getValue()) {
-            final File file = this.getFile();
-            final Plugin plugin = this;
-            getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
-                @Override
-                public void run() {
-                    verboseLog("Checking for a new update...");
-                    Updater updater = new Updater(plugin, PROJECT_ID, file, Updater.UpdateType.DEFAULT, false);
-                    update = updater.getResult() == Updater.UpdateResult.SUCCESS;
-                    verboseLog("Update available: " + update);
-                    if (update) {
-                        updateDetails = updater.getLatestName() + " for " + updater.getLatestGameVersion();
-                    }
-                }
-            });
-        }
-    }
-
     private void setupConfig() {
         config = manager.getConfiguration();
         verboseLog("Setup the config.");
@@ -198,14 +172,6 @@ public class AntiCheat extends JavaPlugin {
 
     public static AntiCheatManager getManager() {
         return manager;
-    }
-
-    public static boolean isUpdated() {
-        return !update;
-    }
-
-    public static String getUpdateDetails() {
-        return updateDetails;
     }
 
     public static String getVersion() {

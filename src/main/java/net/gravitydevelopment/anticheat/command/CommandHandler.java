@@ -41,7 +41,6 @@ public class CommandHandler implements CommandExecutor {
         commands.add(new CommandReport());
         commands.add(new CommandReset());
         commands.add(new CommandSpy());
-        commands.add(new CommandUpdate());
         commands.add(new CommandXray());
     }
 
