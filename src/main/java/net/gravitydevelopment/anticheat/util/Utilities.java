@@ -523,6 +523,7 @@ public final class Utilities {
         INSTANT_BREAK.add(Material.TNT);
         INSTANT_BREAK.add(Material.POTATO);
         INSTANT_BREAK.add(Material.CARROT);
+        INSTANT_BREAK.add(Material.FIRE);
         // END INSTANT BREAK MATERIALS
 
         // START INTERACTABLE MATERIALS
