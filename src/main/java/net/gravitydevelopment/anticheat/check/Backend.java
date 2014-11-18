@@ -464,7 +464,7 @@ public class Backend {
                     yAxisLastViolation.put(name, System.currentTimeMillis());
                     if (!silentMode()) {
                         g.setY(lastYcoord.get(name));
-                        player.sendMessage(ChatColor.RED + "[AntiCheat] Fly hacking on the y-axis detected.  Please wait 5 seconds to prevent getting damage.");
+                        //player.sendMessage(ChatColor.RED + "[AntiCheat] Fly hacking on the y-axis detected.  Please wait 5 seconds to prevent getting damage.");
                         if (g.getBlock().getType() == Material.AIR) {
                             player.teleport(g);
                         }
@@ -652,9 +652,9 @@ public class Backend {
             int i = fastBreakViolation.get(name);
             if (i > violations && math < magic.FASTBREAK_MAXVIOLATIONTIME()) {
                 lastBlockBroken.put(name, System.currentTimeMillis());
-                if (!silentMode()) {
+                /*if (!silentMode()) {
                     player.sendMessage(ChatColor.RED + "[AntiCheat] Fastbreaking detected. Please wait 10 seconds before breaking blocks.");
-                }
+                }*/
                 return new CheckResult(CheckResult.Result.FAILED, player.getName() + " broke blocks too fast " + i + " times in a row (max=" + violations + ")");
             } else if (fastBreakViolation.get(name) > 0 && math > magic.FASTBREAK_MAXVIOLATIONTIME()) {
                 fastBreakViolation.put(name, 0);
@@ -716,9 +716,9 @@ public class Backend {
             AntiCheat.debugLog("Player lastBlockPlaced value = " + lastBlockPlaced + ", diff=" + math);
             if (lastBlockPlaced.get(name) > 0 && math < magic.FASTPLACE_MAXVIOLATIONTIME()) {
                 lastBlockPlaced.put(name, time);
-                if (!silentMode()) {
+                /*if (!silentMode()) {
                     player.sendMessage(ChatColor.RED + "[AntiCheat] Fastplacing detected. Please wait 10 seconds before placing blocks.");
-                }
+                }*/
                 return new CheckResult(CheckResult.Result.FAILED, player.getName() + " placed blocks too fast " + fastPlaceViolation.get(name) + " times in a row (max=" + violations + ")");
             } else if (lastBlockPlaced.get(name) > 0 && math > magic.FASTPLACE_MAXVIOLATIONTIME()) {
                 AntiCheat.debugLog("Reset facePlaceViolation for " + name);
